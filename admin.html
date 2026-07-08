@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publish — SCM Manifest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .form-wrap{ max-width: 720px; margin: 32px auto 64px; }
+  .field{ margin-bottom: 18px; }
+  .field label{
+    display:block; font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-muted); margin-bottom: 6px; letter-spacing:0.03em;
+  }
+  .field input, .field select, .field textarea{
+    width: 100%; background: var(--bg-panel); border: 1px solid var(--border);
+    color: var(--text); font-family: var(--font-body); font-size: 14px;
+    padding: 11px 14px; border-radius: var(--radius); outline: none;
+  }
+  .field textarea{ font-family: var(--font-mono); font-size: 13px; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    border-color: var(--amber); box-shadow: 0 0 0 3px rgba(240,167,63,0.15);
+  }
+  .row2{ display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .publish-btn{
+    font-family: var(--font-display); font-weight: 600; font-size: 15px;
+    padding: 13px 24px; border-radius: var(--radius); border: none;
+    background: var(--amber); color: var(--bg); cursor: pointer;
+  }
+  .publish-btn:disabled{ opacity: 0.5; cursor: wait; }
+  .status-msg{
+    margin-top: 16px; font-family: var(--font-mono); font-size: 13px;
+    padding: 12px 14px; border-radius: var(--radius); display:none;
+  }
+  .status-msg.show{ display:block; }
+  .status-msg.ok{ background: rgba(79,184,166,0.1); color: var(--teal); border: 1px solid var(--teal-dim); }
+  .status-msg.err{ background: rgba(224,103,79,0.1); color: var(--red); border: 1px solid var(--red); }
+  .setup-box{
+    border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px; margin-bottom: 28px; background: var(--bg-panel);
+  }
+  .setup-box p{ font-size: 13px; color: var(--text-muted); margin: 0 0 14px; }
+  .setup-box.saved{ border-color: var(--teal-dim); }
+  .forget-link{ font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); cursor: pointer; }
+  .forget-link:hover{ color: var(--red); }
+  h1.page-title{ font-family: var(--font-display); font-size: 24px; margin: 32px 0 6px; }
+  .page-sub{ color: var(--text-muted); font-size: 13px; margin: 0 0 24px; }
+  .manage-row{
+    display:flex; align-items:center; justify-content: space-between; gap: 14px;
+    padding: 14px 18px; border-bottom: 1px dashed var(--border-soft); background: var(--bg-panel);
+  }
+  .manage-row:last-child{ border-bottom: none; }
+  .manage-row__info{ min-width: 0; }
+  .manage-row__title{ font-family: var(--font-display); font-size: 14px; margin: 0 0 3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .manage-row__meta{ font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .delete-btn{
+    font-family: var(--font-mono); font-size: 11px; padding: 7px 12px;
+    border: 1px solid var(--red); color: var(--red); background: transparent;
+    border-radius: var(--radius); cursor: pointer; flex-shrink: 0;
+  }
+  .delete-btn:hover{ background: rgba(224,103,79,0.12); }
+  .delete-btn:disabled{ opacity: 0.5; cursor: wait; }
+  .image-tools{
+    display:flex; align-items:center; gap: 10px; flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .image-btn{
+    font-family: var(--font-mono); font-size: 12px; padding: 8px 12px;
+    border: 1px solid var(--teal-dim); color: var(--teal); background: rgba(79,184,166,0.06);
+    border-radius: var(--radius); cursor: pointer;
+  }
+  .image-btn:hover{ background: rgba(79,184,166,0.14); }
+  .image-btn:disabled{ opacity: 0.5; cursor: wait; }
+  .image-hint{ font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); }
+  .edit-banner{
+    display:none; align-items:center; justify-content: space-between; gap: 12px;
+    font-family: var(--font-mono); font-size: 12px;
+    background: rgba(240,167,63,0.08); border: 1px solid var(--amber-dim);
+    color: var(--amber); padding: 10px 14px; border-radius: var(--radius);
+    margin-bottom: 18px;
+  }
+  .edit-banner.show{ display:flex; }
+  .manage-row__actions{ display:flex; gap: 8px; flex-shrink: 0; }
+  .edit-btn{
+    font-family: var(--font-mono); font-size: 11px; padding: 7px 12px;
+    border: 1px solid var(--teal-dim); color: var(--teal); background: transparent;
+    border-radius: var(--radius); cursor: pointer;
+  }
+  .edit-btn:hover{ background: rgba(79,184,166,0.12); }
+</style>
+</head>
+<body>
+  <div class="deckline" aria-hidden="true"></div>
+  <header class="port-header">
+    <div class="wrap port-header__inner">
+      <a href="index.html" class="brand">
+        <span class="brand__mark">⚓</span>
+        <span class="brand__text">
+          <span class="brand__title">SCM MANIFEST</span>
+          <span class="brand__sub">Publish new entry</span>
+        </span>
+      </a>
+      <a href="index.html" class="back-link" style="margin:0;">&larr; view manifest</a>
+    </div>
+  </header>
+
+  <div class="wrap form-wrap">
+    <h1 class="page-title" id="formTitle">Log today's learning</h1>
+    <p class="page-sub">Fill this in, hit publish — it commits straight to GitHub. Site updates in ~1 minute.</p>
+
+    <div class="setup-box" id="setupBox">
+      <p id="setupText">One-time setup: paste your GitHub details below. Saved only in this browser.</p>
+      <div class="row2">
+        <div class="field">
+          <label for="ghOwner">MdRajon042</label>
+          <input type="text" id="ghOwner" placeholder="e.g. aminul-rajon">
+        </div>
+        <div class="field">
+          <label for="ghRepo">scm-manifest</label>
+          <input type="text" id="ghRepo" placeholder="e.g. scm-manifest">
+        </div>
+      </div>
+      <div class="field">
+        <label for="ghToken">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</label>
+        <input type="password" id="ghToken" placeholder="ghp_...">
+      </div>
+      <span class="forget-link" id="forgetLink">forget saved credentials</span>
+    </div>
+
+    <div class="edit-banner" id="editBanner">
+      <span id="editBannerText"></span>
+      <span class="forget-link" id="cancelEditLink">cancel edit</span>
+    </div>
+
+    <form id="postForm">
+      <div class="field">
+        <label for="title">Title</label>
+        <input type="text" id="title" required placeholder="e.g. Bullwhip Effect — Why Demand Signals Distort Upstream">
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label for="category">Category</label>
+          <input type="text" id="category" required placeholder="e.g. Logistics / Procurement / Finance">
+        </div>
+        <div class="field">
+          <label for="status">Status</label>
+          <select id="status">
+            <option value="in-transit">In progress (in-transit)</option>
+            <option value="cleared">Understood (cleared)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="tags">Tags (comma separated)</label>
+        <input type="text" id="tags" placeholder="e.g. bullwhip-effect, demand-planning">
+      </div>
+      <div class="field">
+        <label for="summary">One-line summary</label>
+        <input type="text" id="summary" required placeholder="Shows in the list view">
+      </div>
+      <div class="field">
+        <label for="content">Notes (Markdown supported — ## for headings, ** for bold, - for bullets)</label>
+        <textarea id="content" rows="12" required placeholder="## What I learned&#10;&#10;Write freely here..."></textarea>
+        <div class="image-tools">
+          <input type="file" id="imageInput" accept="image/*" hidden>
+          <button type="button" class="image-btn" id="imageBtn">📎 Insert image</button>
+          <span class="image-hint" id="imageHint">Uploads to the repo and drops a Markdown link at your cursor.</span>
+        </div>
+      </div>
+      <button type="submit" class="publish-btn" id="publishBtn">Publish entry</button>
+      <div class="status-msg" id="statusMsg"></div>
+    </form>
+
+    <hr style="border:none;border-top:1px solid var(--border);margin:40px 0;">
+
+    <h1 class="page-title" style="margin-top:0;">Manage entries</h1>
+    <p class="page-sub">Delete an entry permanently from the manifest.</p>
+    <div id="manageList" class="manifest" style="margin-bottom:24px;">
+      <div class="empty-state">Loading entries...</div>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
