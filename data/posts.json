@@ -1,17 +1,5 @@
 [
   {
-    "id": "SCM-2026-0009",
-    "title": "test",
-    "category": "test",
-    "tags": [
-      "test"
-    ],
-    "status": "in-transit",
-    "date": "2026-07-08",
-    "summary": "test",
-    "content": "test"
-  },
-  {
     "id": "SCM-2026-0001",
     "title": "Incoterms 2020 — Who Owns the Risk, Where",
     "category": "Logistics",
