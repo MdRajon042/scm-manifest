@@ -1,9 +1,25 @@
 [
   {
+    "id": "SCM-2026-0009",
+    "title": "test",
+    "category": "test",
+    "tags": [
+      "test"
+    ],
+    "status": "in-transit",
+    "date": "2026-07-08",
+    "summary": "test",
+    "content": "test"
+  },
+  {
     "id": "SCM-2026-0001",
     "title": "Incoterms 2020 — Who Owns the Risk, Where",
     "category": "Logistics",
-    "tags": ["incoterms", "shipping", "risk-transfer"],
+    "tags": [
+      "incoterms",
+      "shipping",
+      "risk-transfer"
+    ],
     "status": "cleared",
     "date": "2026-02-10",
     "summary": "Mapping the 11 Incoterms rules against risk transfer points, cost boundaries, and which mode of transport each one fits.",
@@ -13,7 +29,12 @@
     "id": "SCM-2026-0002",
     "title": "Letter of Credit Mechanics — UCP 600 & SWIFT MT700",
     "category": "Trade Finance",
-    "tags": ["LC", "UCP600", "SWIFT", "trade-finance"],
+    "tags": [
+      "LC",
+      "UCP600",
+      "SWIFT",
+      "trade-finance"
+    ],
     "status": "cleared",
     "date": "2026-02-22",
     "summary": "Breaking down how an LC actually moves money and documents between issuing bank, advising bank, and beneficiary — with the GSK/Symbiotec case as reference.",
@@ -23,7 +44,11 @@
     "id": "SCM-2026-0003",
     "title": "Kraljic Matrix — Segmenting the Supplier Base",
     "category": "Procurement",
-    "tags": ["kraljic-matrix", "procurement-strategy", "supplier-segmentation"],
+    "tags": [
+      "kraljic-matrix",
+      "procurement-strategy",
+      "supplier-segmentation"
+    ],
     "status": "cleared",
     "date": "2026-03-05",
     "summary": "Using profit impact vs supply risk to classify purchases into Strategic, Leverage, Bottleneck, and Non-critical — and what sourcing strategy fits each quadrant.",
@@ -33,7 +58,11 @@
     "id": "SCM-2026-0004",
     "title": "Supplier Performance Evaluation — Multiplicative Scoring Model",
     "category": "Procurement",
-    "tags": ["supplier-evaluation", "kpi", "scoring-model"],
+    "tags": [
+      "supplier-evaluation",
+      "kpi",
+      "scoring-model"
+    ],
     "status": "cleared",
     "date": "2026-03-18",
     "summary": "Worked example scoring ABC Limited at 49.22% using a weighted multiplicative model across quality, delivery, cost, and service.",
@@ -43,7 +72,11 @@
     "id": "SCM-2026-0005",
     "title": "MRP — Working Through a Material Requirements Plan",
     "category": "Operations",
-    "tags": ["mrp", "production-planning", "inventory"],
+    "tags": [
+      "mrp",
+      "production-planning",
+      "inventory"
+    ],
     "status": "cleared",
     "date": "2026-04-02",
     "summary": "Gross-to-net requirements, lot sizing, and lead time offsetting in an MRP exercise.",
@@ -53,7 +86,12 @@
     "id": "SCM-2026-0006",
     "title": "Christopher & Peck — Supply Chain Resilience Framework",
     "category": "Risk & Resilience",
-    "tags": ["resilience", "christopher-peck", "rmg", "covid-19"],
+    "tags": [
+      "resilience",
+      "christopher-peck",
+      "rmg",
+      "covid-19"
+    ],
     "status": "in-transit",
     "date": "2026-04-20",
     "summary": "Core framework for my PGDSCM term paper on RMG sector disruption and resilience — four resilience-building strategies from Christopher & Peck.",
@@ -63,7 +101,11 @@
     "id": "SCM-2026-0007",
     "title": "Cash Conversion Cycle & DuPont — Reading SCM Through Finance",
     "category": "Finance",
-    "tags": ["ccc", "dupont-analysis", "free-cash-flow"],
+    "tags": [
+      "ccc",
+      "dupont-analysis",
+      "free-cash-flow"
+    ],
     "status": "cleared",
     "date": "2026-05-08",
     "summary": "Why SCM decisions show up directly in CCC, DuPont ROE breakdown, and Free Cash Flow — the financial language procurement/logistics people need to speak.",
@@ -73,7 +115,11 @@
     "id": "SCM-2026-0008",
     "title": "Costing & Drop-or-Keep Decisions",
     "category": "Finance",
-    "tags": ["costing", "make-or-buy", "decision-analysis"],
+    "tags": [
+      "costing",
+      "make-or-buy",
+      "decision-analysis"
+    ],
     "status": "cleared",
     "date": "2026-05-25",
     "summary": "Coursework exercise on relevant costing for a drop-or-keep product line decision — separating sunk cost from relevant cost.",
