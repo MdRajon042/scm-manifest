@@ -1,17 +1,5 @@
 [
   {
-    "id": "SCM-2026-0009",
-    "title": "Test",
-    "category": "Test",
-    "tags": [
-      "Test"
-    ],
-    "status": "in-transit",
-    "date": "2026-07-09",
-    "summary": "test",
-    "content": "<p>Hello</p><p><img src=\"https://raw.githubusercontent.com/MdRajon042/scm-manifest/main/assets/images/1783576018122-dmaic.png\"></p><p><br></p><blockquote><strong>Evabe miloto kaj hjoy</strong></blockquote>"
-  },
-  {
     "id": "SCM-2026-0001",
     "title": "Incoterms 2020 — Who Owns the Risk, Where",
     "category": "Logistics",
