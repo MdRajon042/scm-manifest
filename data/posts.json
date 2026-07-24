@@ -57,20 +57,6 @@
     "content": "## The model\n\nUnlike additive scoring (weights just add up), a **multiplicative model** penalizes suppliers harder when they fail badly on even one criterion — a zero on any factor can crater the total score, which mirrors real risk exposure better.\n\n### ABC Limited exercise result\n\nFinal score: **49.22%**\n\nWeak spots were concentrated in on-time delivery consistency, which dragged the composite score down disproportionately versus its quality score — exactly the behavior a multiplicative model is designed to expose.\n\n### Takeaway\n\nWhen picking a scoring model for a real supplier scorecard, additive is easier to explain to stakeholders, but multiplicative gives a more honest signal on suppliers with one critical failure point."
   },
   {
-    "id": "SCM-2026-0005",
-    "title": "MRP — Working Through a Material Requirements Plan",
-    "category": "Operations",
-    "tags": [
-      "mrp",
-      "production-planning",
-      "inventory"
-    ],
-    "status": "cleared",
-    "date": "2026-04-02",
-    "summary": "Gross-to-net requirements, lot sizing, and lead time offsetting in an MRP exercise.",
-    "content": "## MRP logic in one line\n\nGross Requirements − Available Inventory − Scheduled Receipts = **Net Requirements**, then offset backward by lead time to get the **Planned Order Release** date.\n\n### Steps I followed\n\n1. Explode the BOM (Bill of Materials) for each finished good\n2. Net against on-hand inventory + open POs\n3. Apply lot-sizing rule (lot-for-lot vs fixed order quantity)\n4. Offset by lead time to know *when* to release the order\n\n### Where this connects to RMG\n\nFabric and trims ordering timelines are exactly this problem — miss the lead-time offset and the sewing line stops, which is the operational root of a lot of RMG delay penalties."
-  },
-  {
     "id": "SCM-2026-0006",
     "title": "Christopher & Peck — Supply Chain Resilience Framework",
     "category": "Risk & Resilience",
