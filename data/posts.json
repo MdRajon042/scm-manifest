@@ -70,19 +70,5 @@
     "date": "2026-04-20",
     "summary": "Core framework for my PGDSCM term paper on RMG sector disruption and resilience — four resilience-building strategies from Christopher & Peck.",
     "content": "## Four resilience strategies (Christopher & Peck)\n\n1. **Supply chain re-engineering** — build in strategic buffers, not just lean everything\n2. **Collaboration** — information sharing across tiers, not just transactional buying\n3. **Agility** — ability to respond quickly to demand/supply shifts\n4. **Risk management culture** — treat SC risk as a continuous process, not a one-time audit\n\n### Applying to Bangladesh RMG / COVID-19\n\nThis is the backbone of my term paper: *Supply Chain Disruption and Resilience Strategies in Bangladesh's RMG Sector — Lessons from COVID-19*. COVID exposed over-reliance on single-country sourcing (mainly China for fabric/trims) and thin buffer stock across most factories.\n\n### Status\n\nFull draft in progress — this entry will get updated as the paper develops further, this is also becoming a LinkedIn article for the SCM job search."
-  },
-  {
-    "id": "SCM-2026-0007",
-    "title": "Cash Conversion Cycle & DuPont — Reading SCM Through Finance",
-    "category": "Finance",
-    "tags": [
-      "ccc",
-      "dupont-analysis",
-      "free-cash-flow"
-    ],
-    "status": "cleared",
-    "date": "2026-05-08",
-    "summary": "Why SCM decisions show up directly in CCC, DuPont ROE breakdown, and Free Cash Flow — the financial language procurement/logistics people need to speak.",
-    "content": "## Cash Conversion Cycle\n\n**CCC = Days Inventory Outstanding + Days Sales Outstanding − Days Payable Outstanding**\n\nEvery inventory or supplier-payment-term decision I make as an SCM professional directly moves this number — it's the clearest bridge between operations and the CFO's priorities.\n\n## DuPont breakdown\n\n**ROE = Net Profit Margin × Asset Turnover × Financial Leverage**\n\nInventory efficiency (a core SCM lever) sits inside Asset Turnover — meaning a warehouse/inventory improvement is not just an ops win, it is a shareholder-return story.\n\n### Why I'm logging this\n\nGoing from BPO/QA into SCM, this is the vocabulary that turns \"I reduced stockouts\" into a sentence a hiring manager or CFO actually cares about."
   }
 ]
