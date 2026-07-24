@@ -84,19 +84,5 @@
     "date": "2026-05-08",
     "summary": "Why SCM decisions show up directly in CCC, DuPont ROE breakdown, and Free Cash Flow — the financial language procurement/logistics people need to speak.",
     "content": "## Cash Conversion Cycle\n\n**CCC = Days Inventory Outstanding + Days Sales Outstanding − Days Payable Outstanding**\n\nEvery inventory or supplier-payment-term decision I make as an SCM professional directly moves this number — it's the clearest bridge between operations and the CFO's priorities.\n\n## DuPont breakdown\n\n**ROE = Net Profit Margin × Asset Turnover × Financial Leverage**\n\nInventory efficiency (a core SCM lever) sits inside Asset Turnover — meaning a warehouse/inventory improvement is not just an ops win, it is a shareholder-return story.\n\n### Why I'm logging this\n\nGoing from BPO/QA into SCM, this is the vocabulary that turns \"I reduced stockouts\" into a sentence a hiring manager or CFO actually cares about."
-  },
-  {
-    "id": "SCM-2026-0008",
-    "title": "Costing & Drop-or-Keep Decisions",
-    "category": "Finance",
-    "tags": [
-      "costing",
-      "make-or-buy",
-      "decision-analysis"
-    ],
-    "status": "cleared",
-    "date": "2026-05-25",
-    "summary": "Coursework exercise on relevant costing for a drop-or-keep product line decision — separating sunk cost from relevant cost.",
-    "content": "## The core rule\n\nOnly **relevant costs** (future, differential, avoidable) belong in a drop-or-keep decision. Sunk costs and unavoidable allocated overhead are noise.\n\n### Common trap\n\nA product line can look unprofitable on a full-absorption income statement purely because of allocated fixed overhead — but dropping it may not actually save that overhead, meaning the \"loss\" is partly an accounting artifact, not a cash reality.\n\n### Method\n\n1. Identify avoidable fixed costs if the line is dropped\n2. Compare contribution margin lost vs costs avoided\n3. Check for opportunity cost of the freed capacity"
   }
 ]
