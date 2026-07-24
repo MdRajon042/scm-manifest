@@ -55,20 +55,5 @@
     "date": "2026-03-18",
     "summary": "Worked example scoring ABC Limited at 49.22% using a weighted multiplicative model across quality, delivery, cost, and service.",
     "content": "## The model\n\nUnlike additive scoring (weights just add up), a **multiplicative model** penalizes suppliers harder when they fail badly on even one criterion — a zero on any factor can crater the total score, which mirrors real risk exposure better.\n\n### ABC Limited exercise result\n\nFinal score: **49.22%**\n\nWeak spots were concentrated in on-time delivery consistency, which dragged the composite score down disproportionately versus its quality score — exactly the behavior a multiplicative model is designed to expose.\n\n### Takeaway\n\nWhen picking a scoring model for a real supplier scorecard, additive is easier to explain to stakeholders, but multiplicative gives a more honest signal on suppliers with one critical failure point."
-  },
-  {
-    "id": "SCM-2026-0006",
-    "title": "Christopher & Peck — Supply Chain Resilience Framework",
-    "category": "Risk & Resilience",
-    "tags": [
-      "resilience",
-      "christopher-peck",
-      "rmg",
-      "covid-19"
-    ],
-    "status": "in-transit",
-    "date": "2026-04-20",
-    "summary": "Core framework for my PGDSCM term paper on RMG sector disruption and resilience — four resilience-building strategies from Christopher & Peck.",
-    "content": "## Four resilience strategies (Christopher & Peck)\n\n1. **Supply chain re-engineering** — build in strategic buffers, not just lean everything\n2. **Collaboration** — information sharing across tiers, not just transactional buying\n3. **Agility** — ability to respond quickly to demand/supply shifts\n4. **Risk management culture** — treat SC risk as a continuous process, not a one-time audit\n\n### Applying to Bangladesh RMG / COVID-19\n\nThis is the backbone of my term paper: *Supply Chain Disruption and Resilience Strategies in Bangladesh's RMG Sector — Lessons from COVID-19*. COVID exposed over-reliance on single-country sourcing (mainly China for fabric/trims) and thin buffer stock across most factories.\n\n### Status\n\nFull draft in progress — this entry will get updated as the paper develops further, this is also becoming a LinkedIn article for the SCM job search."
   }
 ]
