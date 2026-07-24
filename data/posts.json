@@ -41,19 +41,5 @@
     "date": "2026-03-05",
     "summary": "Using profit impact vs supply risk to classify purchases into Strategic, Leverage, Bottleneck, and Non-critical — and what sourcing strategy fits each quadrant.",
     "content": "## The two axes\n\n- **X-axis:** Supply risk (availability, number of suppliers, substitutability)\n- **Y-axis:** Profit impact (volume purchased, % of total cost)\n\n### Four quadrants\n\n| Quadrant | Profit Impact | Supply Risk | Strategy |\n|---|---|---|---|\n| Strategic | High | High | Partnership, joint planning |\n| Leverage | High | Low | Competitive bidding, negotiate hard |\n| Bottleneck | Low | High | Secure supply, find alternates |\n| Non-critical | Low | Low | Simplify/automate ordering |\n\n### Why it matters for BD sourcing\n\nMost RMG raw material sourcing (yarn, dyes for niche colors) sits in **Bottleneck** — few suppliers, but low overall spend %. That changes the negotiation posture completely versus a Leverage item."
-  },
-  {
-    "id": "SCM-2026-0004",
-    "title": "Supplier Performance Evaluation — Multiplicative Scoring Model",
-    "category": "Procurement",
-    "tags": [
-      "supplier-evaluation",
-      "kpi",
-      "scoring-model"
-    ],
-    "status": "cleared",
-    "date": "2026-03-18",
-    "summary": "Worked example scoring ABC Limited at 49.22% using a weighted multiplicative model across quality, delivery, cost, and service.",
-    "content": "## The model\n\nUnlike additive scoring (weights just add up), a **multiplicative model** penalizes suppliers harder when they fail badly on even one criterion — a zero on any factor can crater the total score, which mirrors real risk exposure better.\n\n### ABC Limited exercise result\n\nFinal score: **49.22%**\n\nWeak spots were concentrated in on-time delivery consistency, which dragged the composite score down disproportionately versus its quality score — exactly the behavior a multiplicative model is designed to expose.\n\n### Takeaway\n\nWhen picking a scoring model for a real supplier scorecard, additive is easier to explain to stakeholders, but multiplicative gives a more honest signal on suppliers with one critical failure point."
   }
 ]
