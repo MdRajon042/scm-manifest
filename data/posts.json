@@ -39,19 +39,5 @@
     "date": "2026-02-22",
     "summary": "Breaking down how an LC actually moves money and documents between issuing bank, advising bank, and beneficiary — with the GSK/Symbiotec case as reference.",
     "content": "## The core flow\n\nApplicant (buyer) → Issuing Bank → Advising/Confirming Bank → Beneficiary (seller)\n\nAn LC is a **bank's payment guarantee**, conditional on the beneficiary presenting exactly the documents specified — nothing more, nothing less. Discrepancies = bank can refuse payment.\n\n### SWIFT MT700\n\nThe standard message format issuing banks use to open an LC. Fields worth remembering:\n\n- **Field 45A** — description of goods\n- **Field 46A** — documents required\n- **Field 47A** — additional conditions\n\n### GSK / Symbiotec case takeaway\n\nPharma imports carry extra document scrutiny (batch certificates, regulatory approvals) layered on top of standard LC docs — a reminder that LC document lists are industry-specific, not generic."
-  },
-  {
-    "id": "SCM-2026-0003",
-    "title": "Kraljic Matrix — Segmenting the Supplier Base",
-    "category": "Procurement",
-    "tags": [
-      "kraljic-matrix",
-      "procurement-strategy",
-      "supplier-segmentation"
-    ],
-    "status": "cleared",
-    "date": "2026-03-05",
-    "summary": "Using profit impact vs supply risk to classify purchases into Strategic, Leverage, Bottleneck, and Non-critical — and what sourcing strategy fits each quadrant.",
-    "content": "## The two axes\n\n- **X-axis:** Supply risk (availability, number of suppliers, substitutability)\n- **Y-axis:** Profit impact (volume purchased, % of total cost)\n\n### Four quadrants\n\n| Quadrant | Profit Impact | Supply Risk | Strategy |\n|---|---|---|---|\n| Strategic | High | High | Partnership, joint planning |\n| Leverage | High | Low | Competitive bidding, negotiate hard |\n| Bottleneck | Low | High | Secure supply, find alternates |\n| Non-critical | Low | Low | Simplify/automate ordering |\n\n### Why it matters for BD sourcing\n\nMost RMG raw material sourcing (yarn, dyes for niche colors) sits in **Bottleneck** — few suppliers, but low overall spend %. That changes the negotiation posture completely versus a Leverage item."
   }
 ]
