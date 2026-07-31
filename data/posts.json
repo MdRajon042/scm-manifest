@@ -1,5 +1,25 @@
 [
   {
+  "id": "SCM-2026-0007",
+  "title": "Lead Time Mastery — Blueprint of Time (Interactive Module)",
+  "category": "Interactive Learning Tools",
+  "tags": [
+    "Lead Time",
+    "Interactive",
+    "EOQ",
+    "Bullwhip Effect",
+    "Cash-to-Cash Cycle",
+    "Postponement",
+    "TOC"
+  ],
+  "status": "cleared",
+  "date": "2026-08-01",
+  "type": "interactive",
+  "url": "/lead-time-mastery.html",
+  "summary": "MRP, Complexity, আর Strategic Lead Time — তিনটা আর্টিকেল একসাথে হাতে-কলমে রিভিশন করার জন্য একটা ইন্টার‌্যাক্টিভ মডিউল। EOQ calculator, Cash-to-Cash cycle, Bullwhip simulator, Postponement, TOC এবং একটা self-check quiz সহ।",
+  "content": "<p>এই এন্ট্রিটা একটা <strong>ইন্টার‌্যাক্টিভ মডিউল</strong> — সরাসরি নতুন ট্যাবে খুলবে। এখানে normal article-এর বদলে live calculator, simulator, আর quiz আছে।</p><p>যদি সরাসরি এই পেজে এসে থাকো, <a href=\"/lead-time-mastery.html\" target=\"_blank\" rel=\"noopener noreferrer\">এখানে ক্লিক করে মডিউলটা খুলো</a>।</p>"
+},
+  {
     "id": "SCM-2026-0006",
     "title": "Strategic Lead Time Management",
     "category": "Supply Chain Strategy",
