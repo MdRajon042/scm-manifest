@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead Time Mastery — Blueprint of Time</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B2136;
+    --blue-mid:#123152;
+    --blue-line:rgba(180,210,240,0.14);
+    --blue-line-strong:rgba(180,210,240,0.28);
+    --paper:#EAF2FA;
+    --paper-dim:#9FB6CC;
+    --paper-dim2:#6F869E;
+    --orange:#FF6B35;
+    --orange-dim:rgba(255,107,53,0.18);
+    --teal:#4ECDC4;
+    --teal-dim:rgba(78,205,196,0.16);
+    --amber:#FFC145;
+    --danger:#FF5D5D;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+    --font-bn:'Noto Sans Bengali', sans-serif;
+    --radius:2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--blue-deep);
+    color:var(--paper);
+    font-family:var(--font-bn);
+    line-height:1.75;
+    background-image:
+      linear-gradient(var(--blue-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--blue-line) 1px, transparent 1px);
+    background-size:36px 36px;
+    background-attachment:fixed;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  /* ---------- Utility ---------- */
+  .wrap{max-width:980px; margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--orange);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:20px; height:1px; background:var(--orange);}
+  h1,h2,h3{font-family:var(--font-display); font-weight:700; letter-spacing:-0.01em;}
+  .bn-head{font-family:var(--font-bn); font-weight:700;}
+
+  /* ---------- Sheet frame (blueprint feel) ---------- */
+  .sheet{
+    border:1px solid var(--blue-line-strong);
+    border-radius:var(--radius);
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent 30%);
+    position:relative;
+    padding:56px;
+    margin:64px 0;
+  }
+  .sheet::before{
+    content:attr(data-sheet);
+    position:absolute; top:-1px; left:-1px;
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--blue-deep);
+    background:var(--orange);
+    padding:4px 10px;
+    letter-spacing:0.08em;
+  }
+  .sheet-corner{
+    position:absolute; width:14px; height:14px;
+    border-color:var(--blue-line-strong); border-style:solid;
+  }
+  .sheet-corner.tl{top:-1px; left:-1px; border-width:1px 0 0 1px;}
+  .sheet-corner.tr{top:-1px; right:-1px; border-width:1px 1px 0 0;}
+  .sheet-corner.bl{bottom:-1px; left:-1px; border-width:0 0 1px 1px;}
+  .sheet-corner.br{bottom:-1px; right:-1px; border-width:0 1px 1px 0;}
+
+  @media (max-width:720px){ .sheet{padding:28px 20px;} }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,33,54,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--blue-line-strong);
+  }
+  .nav-inner{
+    max-width:980px; margin:0 auto; padding:14px 24px;
+    display:flex; gap:4px; overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .nav-inner::-webkit-scrollbar{display:none;}
+  .nav-btn{
+    font-family:var(--font-mono);
+    font-size:11px;
+    white-space:nowrap;
+    color:var(--paper-dim2);
+    background:transparent;
+    border:1px solid transparent;
+    padding:7px 12px;
+    cursor:pointer;
+    letter-spacing:0.03em;
+    transition:all .2s ease;
+  }
+  .nav-btn:hover{color:var(--paper); border-color:var(--blue-line-strong);}
+  .nav-btn.active{color:var(--orange); border-color:var(--orange); background:var(--orange-dim);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:100px 24px 60px;
+    max-width:980px; margin:0 auto;
+    text-align:left;
+  }
+  .hero h1{
+    font-size:clamp(34px, 6vw, 60px);
+    line-height:1.08;
+    margin:18px 0 20px;
+    color:var(--paper);
+  }
+  .hero h1 span{color:var(--orange);}
+  .hero p.lead{
+    font-family:var(--font-bn);
+    font-size:18px;
+    color:var(--paper-dim);
+    max-width:640px;
+  }
+
+  /* Pipeline hero visual */
+  .pipe-visual{
+    margin:44px 0 8px;
+    border:1px solid var(--blue-line-strong);
+    padding:20px 20px 14px;
+    position:relative;
+    overflow:hidden;
+    background:rgba(255,255,255,0.015);
+  }
+  .pipe-track{
+    position:relative; height:64px;
+    border-top:2px solid var(--blue-line-strong);
+    border-bottom:2px solid var(--blue-line-strong);
+    background:repeating-linear-gradient(90deg, transparent, transparent 38px, var(--blue-line) 38px, var(--blue-line) 39px);
+    overflow:hidden;
+  }
+  .blockage{
+    position:absolute; top:-2px; bottom:-2px; width:10px;
+    background:repeating-linear-gradient(45deg, var(--danger), var(--danger) 4px, transparent 4px, transparent 8px);
+    opacity:0.85;
+  }
+  .particle{
+    position:absolute; top:50%; width:9px; height:9px; border-radius:50%;
+    background:var(--teal);
+    transform:translateY(-50%);
+    animation:flow 6s linear infinite;
+    box-shadow:0 0 8px var(--teal);
+  }
+  .particle.orange{background:var(--orange); box-shadow:0 0 8px var(--orange);}
+  @keyframes flow{
+    0%{left:-3%;}
+    38%{left:44%;}
+    50%{left:44%;}
+    100%{left:103%;}
+  }
+  .pipe-labels{
+    display:flex; justify-content:space-between;
+    font-family:var(--font-mono); font-size:10px; color:var(--paper-dim2);
+    letter-spacing:0.06em; margin-top:10px;
+  }
+  .pipe-legend{display:flex; gap:18px; margin-top:10px; font-family:var(--font-mono); font-size:11px; color:var(--paper-dim);}
+  .dot{width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px;}
+
+  /* ---------- Section headings ---------- */
+  .section-tag{
+    display:inline-block; font-family:var(--font-mono); font-size:11px;
+    color:var(--blue-deep); background:var(--teal); padding:3px 9px;
+    letter-spacing:0.06em; margin-bottom:14px;
+  }
+  .sheet h2{font-size:clamp(24px,4vw,32px); margin-bottom:6px; color:var(--paper);}
+  .sheet .sub{font-family:var(--font-mono); font-size:12px; color:var(--paper-dim2); margin-bottom:28px; letter-spacing:0.02em;}
+  p{color:var(--paper-dim); margin-bottom:14px;}
+  strong{color:var(--paper); font-weight:600;}
+  .callout{
+    border-left:2px solid var(--orange);
+    background:var(--orange-dim);
+    padding:14px 18px;
+    margin:20px 0;
+    font-size:15px;
+  }
+  .callout strong{color:var(--amber);}
+
+  /* ---------- Cards / grid ---------- */
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0;}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:20px 0;}
+  @media (max-width:720px){ .grid2, .grid3{grid-template-columns:1fr;} }
+  .card{
+    border:1px solid var(--blue-line-strong);
+    padding:18px;
+    background:rgba(255,255,255,0.02);
+  }
+  .card .k{font-family:var(--font-mono); font-size:11px; color:var(--teal); letter-spacing:0.05em;}
+  .card .v{font-family:var(--font-display); font-size:22px; font-weight:700; color:var(--paper); margin-top:6px;}
+
+  /* ---------- Interactive: calculators ---------- */
+  .calc{
+    border:1px solid var(--blue-line-strong);
+    background:rgba(255,255,255,0.025);
+    padding:26px;
+    margin:26px 0;
+  }
+  .calc-title{font-family:var(--font-mono); font-size:12px; color:var(--orange); letter-spacing:0.06em; margin-bottom:18px; text-transform:uppercase;}
+  .calc-row{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:14px;}
+  @media (max-width:640px){ .calc-row{grid-template-columns:1fr;} }
+  .field label{display:block; font-family:var(--font-mono); font-size:11px; color:var(--paper-dim2); margin-bottom:6px;}
+  .field input{
+    width:100%; background:var(--blue-deep); border:1px solid var(--blue-line-strong);
+    color:var(--paper); font-family:var(--font-mono); font-size:15px; padding:9px 10px;
+  }
+  .field input:focus{outline:2px solid var(--teal); outline-offset:1px;}
+  .calc-output{
+    margin-top:18px; padding-top:18px; border-top:1px dashed var(--blue-line-strong);
+    display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+  }
+  .calc-output .big{font-family:var(--font-display); font-size:38px; font-weight:700; color:var(--teal);}
+  .calc-output .unit{font-family:var(--font-mono); font-size:13px; color:var(--paper-dim2);}
+  .calc-note{font-family:var(--font-bn); font-size:13px; color:var(--paper-dim2); margin-top:10px;}
+
+  /* ---------- Accordion ---------- */
+  .accordion-item{border:1px solid var(--blue-line-strong); margin-bottom:10px; background:rgba(255,255,255,0.015);}
+  .accordion-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 18px; cursor:pointer; user-select:none;
+  }
+  .accordion-head .num{font-family:var(--font-mono); color:var(--orange); margin-right:12px; font-size:13px;}
+  .accordion-head h4{font-family:var(--font-bn); font-weight:600; font-size:16px; color:var(--paper); display:inline;}
+  .accordion-head .chevron{font-family:var(--font-mono); color:var(--paper-dim2); transition:transform .2s ease;}
+  .accordion-item.open .chevron{transform:rotate(45deg); color:var(--orange);}
+  .accordion-body{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .accordion-item.open .accordion-body{max-height:600px;}
+  .accordion-body-inner{padding:0 18px 18px 44px; color:var(--paper-dim); font-size:14.5px;}
+
+  /* ---------- Bullwhip simulator ---------- */
+  .bw-controls{display:flex; align-items:center; gap:16px; margin-bottom:22px; flex-wrap:wrap;}
+  .bw-controls label{font-family:var(--font-mono); font-size:11px; color:var(--paper-dim2);}
+  input[type=range]{accent-color:var(--orange); width:180px;}
+  .bw-chart{display:flex; align-items:flex-end; gap:22px; height:180px; padding:0 6px; border-bottom:1px solid var(--blue-line-strong);}
+  .bw-col{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%;}
+  .bw-bar{width:60%; background:linear-gradient(180deg, var(--teal), var(--orange)); transition:height .4s ease; min-height:2px;}
+  .bw-tier{font-family:var(--font-mono); font-size:10px; color:var(--paper-dim2); margin-top:8px; text-align:center;}
+  .bw-val{font-family:var(--font-mono); font-size:13px; color:var(--paper); margin-bottom:4px;}
+
+  /* ---------- Stepper (TOC) ---------- */
+  .stepper{display:flex; flex-direction:column; gap:0; margin:22px 0;}
+  .step{display:flex; gap:18px; padding:16px 0; border-left:1px solid var(--blue-line-strong); padding-left:24px; position:relative;}
+  .step:last-child{border-left:1px solid transparent;}
+  .step::before{
+    content:attr(data-n); position:absolute; left:-13px; top:16px;
+    width:26px; height:26px; border-radius:50%; background:var(--blue-deep);
+    border:1px solid var(--orange); color:var(--orange);
+    font-family:var(--font-mono); font-size:11px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step h4{font-family:var(--font-bn); font-size:16px; color:var(--paper); margin-bottom:4px;}
+  .step p{font-size:14px; margin-bottom:0;}
+
+  /* ---------- Complexity grid mini ---------- */
+  .mini-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:20px 0;}
+  @media (max-width:720px){ .mini-grid{grid-template-columns:repeat(2,1fr);} }
+  .mini-tag{
+    border:1px solid var(--blue-line-strong); padding:12px 10px; font-size:12.5px;
+    text-align:center; color:var(--paper-dim); background:rgba(255,255,255,0.015);
+  }
+  .mini-tag b{display:block; color:var(--teal); font-family:var(--font-mono); font-size:10px; margin-bottom:4px;}
+
+  /* ---------- Quiz ---------- */
+  .quiz-q{border:1px solid var(--blue-line-strong); padding:20px; margin-bottom:16px; background:rgba(255,255,255,0.015);}
+  .quiz-q p.qtext{color:var(--paper); font-weight:600; margin-bottom:14px; font-size:15.5px;}
+  .quiz-opts{display:flex; flex-direction:column; gap:8px;}
+  .quiz-opt{
+    text-align:left; padding:11px 14px; border:1px solid var(--blue-line-strong);
+    background:transparent; color:var(--paper-dim); cursor:pointer; font-family:var(--font-bn); font-size:14px;
+    transition:all .15s ease;
+  }
+  .quiz-opt:hover{border-color:var(--teal);}
+  .quiz-opt.correct{border-color:var(--teal); background:var(--teal-dim); color:var(--paper);}
+  .quiz-opt.wrong{border-color:var(--danger); background:rgba(255,93,93,0.12); color:var(--paper);}
+  .quiz-feedback{margin-top:10px; font-size:13.5px; color:var(--paper-dim2); display:none;}
+  .quiz-feedback.show{display:block;}
+  .quiz-score{
+    font-family:var(--font-mono); font-size:14px; color:var(--orange); text-align:center;
+    margin-top:10px; letter-spacing:0.04em;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center; padding:60px 24px 80px; color:var(--paper-dim2);
+    font-family:var(--font-mono); font-size:11px; letter-spacing:0.04em;
+  }
+  footer .mark{color:var(--orange); font-size:13px; margin-bottom:8px; display:block;}
+
+  table{width:100%; border-collapse:collapse; margin:16px 0;}
+  th,td{border:1px solid var(--blue-line-strong); padding:9px 12px; text-align:left; font-size:14px; color:var(--paper-dim);}
+  th{font-family:var(--font-mono); font-size:11px; color:var(--teal); text-transform:uppercase; letter-spacing:0.04em;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner" id="navInner">
+    <button class="nav-btn active" data-target="hero">শুরু</button>
+    <button class="nav-btn" data-target="s1">০১ ফাউন্ডেশন</button>
+    <button class="nav-btn" data-target="s2">০২ C2C</button>
+    <button class="nav-btn" data-target="s3">০৩ লিড টাইম গ্যাপ</button>
+    <button class="nav-btn" data-target="s4">০৪ বুলহুইপ</button>
+    <button class="nav-btn" data-target="s5">০৫ পোস্টপোনমেন্ট</button>
+    <button class="nav-btn" data-target="s6">০৬ TOC</button>
+    <button class="nav-btn" data-target="s7">০৭ কমপ্লেক্সিটি</button>
+    <button class="nav-btn" data-target="s8">০৮ সেলফ-চেক</button>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <span class="eyebrow">SCM MANIFEST · INTERACTIVE MODULE</span>
+  <h1>ব্লুপ্রিন্ট অফ টাইম:<br><span>Lead Time Mastery</span></h1>
+  <p class="lead">MRP, Complexity আর Strategic Lead Time — এই তিনটা আর্টিকেল যেখানে থেমেছিল, এই ইন্টার‌্যাক্টিভ মডিউল সেখান থেকে শুরু। প্রতিটা concept-এ হাত দিয়ে দেখো — calculate করো, simulate করো, নিজেকে test করো।</p>
+
+  <div class="pipe-visual">
+    <div class="pipe-track" id="pipeTrack">
+      <div class="blockage" style="left:44%;" title="Blockage: Extended Set-up Time"></div>
+    </div>
+    <div class="pipe-labels">
+      <span>PROCUREMENT</span><span>MANUFACTURING</span><span>DELIVERY</span>
+    </div>
+    <div class="pipe-legend">
+      <span><span class="dot" style="background:var(--teal)"></span>Value-Adding Flow</span>
+      <span><span class="dot" style="background:var(--orange)"></span>Non-Value-Adding Flow</span>
+      <span><span class="dot" style="background:var(--danger)"></span>Blockage / Bottleneck</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- SECTION 1: FOUNDATIONS -->
+  <div class="sheet" id="s1" data-sheet="SHEET 01 / FOUNDATIONS">
+    <div class="sheet-corner tl"></div><div class="sheet-corner tr"></div><div class="sheet-corner bl"></div><div class="sheet-corner br"></div>
+    <span class="section-tag">FOUNDATION</span>
+    <h2 class="bn-head">Inventory Foundations — EOQ Calculator</h2>
+    <p class="sub">SAFETY STOCK · REORDER LEVEL · ECONOMIC ORDER QUANTITY</p>
+
+    <p>Lead Time নিয়ে master হওয়ার আগে তিনটা বেসিক inventory concept হাতে-কলমে বোঝা দরকার। এখানে EOQ (Economic Order Quantity) — সবচেয়ে cost-efficient order size — নিজে calculate করে দেখো।</p>
+
+    <div class="calc">
+      <div class="calc-title">EOQ Calculator — Wilson Formula</div>
+      <div class="calc-row">
+        <div class="field">
+          <label>বার্ষিক চাহিদা (D) — units/year</label>
+          <input type="number" id="eoqD" value="12000">
+        </div>
+        <div class="field">
+          <label>প্রতি অর্ডার Ordering Cost (S) — Tk</label>
+          <input type="number" id="eoqS" value="450">
+        </div>
+        <div class="field">
+          <label>প্রতি ইউনিট Holding Cost (H) — Tk/year</label>
+          <input type="number" id="eoqH" value="18">
+        </div>
+      </div>
+      <div class="calc-output">
+        <div>
+          <div class="big" id="eoqResult">0</div>
+          <div class="unit">units per order (EOQ)</div>
+        </div>
+        <div style="margin-left:auto; text-align:right;">
+          <div style="font-family:var(--font-mono); font-size:12px; color:var(--paper-dim2);">EOQ = √(2DS / H)</div>
+        </div>
+      </div>
+      <div class="calc-note">সংখ্যাগুলো বদলে দেখো — Ordering cost বাড়ালে EOQ বাড়ে, Holding cost বাড়ালে EOQ কমে। এটাই trade-off logic যেটা Reorder Level আর Safety Stock সেটিং-এ পরে কাজে লাগবে।</div>
+    </div>
+
+    <div class="grid3">
+      <div class="card"><div class="k">SAFETY STOCK</div><div class="v" style="font-size:15px; font-weight:500; color:var(--paper-dim);">Demand/lead-time variability কভার করার জন্য রাখা extra buffer stock</div></div>
+      <div class="card"><div class="k">REORDER LEVEL (ROL)</div><div class="v" style="font-size:15px; font-weight:500; color:var(--paper-dim);">যে stock level-এ পৌঁছালে নতুন order trigger হয় = (Avg daily usage × Lead time) + Safety Stock</div></div>
+      <div class="card"><div class="k">EOQ</div><div class="v" style="font-size:15px; font-weight:500; color:var(--paper-dim);">Ordering cost ও Holding cost — দুইটার total সর্বনিম্ন করে এমন order quantity</div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: CASH TO CASH -->
+  <div class="sheet" id="s2" data-sheet="SHEET 02 / C2C CYCLE">
+    <div class="sheet-corner tl"></div><div class="sheet-corner tr"></div><div class="sheet-corner bl"></div><div class="sheet-corner br"></div>
+    <span class="section-tag">CORE FRAMEWORK</span>
+    <h2 class="bn-head">Cash-to-Cash Cycle Calculator</h2>
+    <p class="sub">DIO + DSO − DPO</p>
+
+    <p>Strategic Lead Time আর্টিকেলে বলেছিলাম — Cash-to-Cash হলো একটা order-কে cash-এ রূপান্তর করার সময়। এখন এটার actual formula দিয়ে হিসাব করো:</p>
+
+    <div class="callout"><strong>C2C Cycle = DIO + DSO − DPO</strong><br>
+    DIO = Days Inventory Outstanding (স্টক কতদিন গুদামে থাকে) · DSO = Days Sales Outstanding (বিক্রির পর টাকা পেতে কতদিন লাগে) · DPO = Days Payable Outstanding (সাপ্লায়ারকে টাকা দিতে কতদিন সময় নেওয়া হয়)</div>
+
+    <div class="calc">
+      <div class="calc-title">Calculate Your C2C Cycle</div>
+      <div class="calc-row">
+        <div class="field">
+          <label>DIO — Inventory কতদিন গুদামে থাকে</label>
+          <input type="number" id="c2cDIO" value="45">
+        </div>
+        <div class="field">
+          <label>DSO — Payment পেতে কতদিন লাগে</label>
+          <input type="number" id="c2cDSO" value="30">
+        </div>
+        <div class="field">
+          <label>DPO — Supplier-কে টাকা দিতে কত সময় নেওয়া হয়</label>
+          <input type="number" id="c2cDPO" value="35">
+        </div>
+      </div>
+      <div class="calc-output">
+        <div>
+          <div class="big" id="c2cResult">0</div>
+          <div class="unit">দিন — এতদিন company-র টাকা আটকে থাকে</div>
+        </div>
+      </div>
+      <div class="calc-note" id="c2cNote"></div>
+    </div>
+
+    <p><strong>RMG angle:</strong> Bangladesh RMG factory-তে DPO সাধারণত buyer-দের payment term-এর উপর নির্ভরশীল থাকে (LC-based, ৩০-৯০ দিন), আর DIO fabric/accessories lead time-এর কারণে বেড়ে যায় যদি sourcing দূরের দেশ (চীন) থেকে হয়। এই তিনটা সংখ্যা কমানোই resilience-এর একটা concrete financial lever।</p>
+  </div>
+
+  <!-- SECTION 3: LEAD TIME GAP -->
+  <div class="sheet" id="s3" data-sheet="SHEET 03 / LEAD TIME GAP">
+    <div class="sheet-corner tl"></div><div class="sheet-corner tr"></div><div class="sheet-corner bl"></div><div class="sheet-corner br"></div>
+    <span class="section-tag">CORE FRAMEWORK</span>
+    <h2 class="bn-head">Lead Time Gap Simulator</h2>
+    <p class="sub">LOGISTICS LEAD TIME vs CUSTOMER ORDER CYCLE</p>
+
+    <p>মনে আছে — যদি Logistics Lead Time = Customer-এর Required Order Cycle হয়, তাহলে Forecast আর Inventory-ই লাগে না? নিচে দুটো সংখ্যা বদলে দেখো Gap কতটা তৈরি হয়, আর সেই gap পূরণ করতে কতটা Forecast-নির্ভরতা দরকার হবে।</p>
+
+    <div class="calc">
+      <div class="calc-title">Gap Simulator</div>
+      <div class="calc-row" style="grid-template-columns:1fr 1fr;">
+        <div class="field">
+          <label>Logistics Lead Time (Procurement + Manufacturing + Delivery) — দিন</label>
+          <input type="number" id="gapLLT" value="60">
+        </div>
+        <div class="field">
+          <label>Customer Required Order Cycle — দিন</label>
+          <input type="number" id="gapCOC" value="15">
+        </div>
+      </div>
+      <div class="calc-output">
+        <div>
+          <div class="big" id="gapResult" style="color:var(--danger);">0</div>
+          <div class="unit">দিনের Gap — এই সময়টুকু Forecast দিয়ে কভার করতে হবে</div>
+        </div>
+      </div>
+      <div class="calc-note" id="gapNote"></div>
+    </div>
+
+    <table>
+      <tr><th>Gap পরিস্থিতি</th><th>এর মানে কী</th></tr>
+      <tr><td>Gap = 0</td><td>Forecast/Inventory দরকার নেই — pure make-to-order সম্ভব</td></tr>
+      <tr><td>Gap মাঝারি</td><td>আংশিক forecast + কিছু buffer stock দরকার</td></tr>
+      <tr><td>Gap বড়</td><td>ভারী forecast-নির্ভরতা, বড় safety stock, বেশি risk ও cost</td></tr>
+    </table>
+  </div>
+
+  <!-- SECTION 4: BULLWHIP -->
+  <div class="sheet" id="s4" data-sheet="SHEET 04 / BULLWHIP EFFECT">
+    <div class="sheet-corner tl"></div><div class="sheet-corner tr"></div><div class="sheet-corner bl"></div><div class="sheet-corner br"></div>
+    <span class="section-tag">DEMAND DISTORTION</span>
+    <h2 class="bn-head">Bullwhip Effect Simulator</h2>
+    <p class="sub">CUSTOMER → RETAILER → DISTRIBUTOR → FACTORY</p>
+
+    <p>Information Complexity আর্টিকেলে যেটা বলেছিলাম — একটা ছোট demand change যখন supply chain-এর এক tier থেকে আরেক tier-এ যায়, প্রতিবার একটু একটু করে amplify হতে থাকে। Slider সরিয়ে দেখো এই "whip" effect কেমন দেখায়:</p>
+
+    <div class="calc">
+      <div class="bw-controls">
+        <div>
+          <label>Actual Customer Demand পরিবর্তন</label><br>
+          <input type="range" id="bwInput" min="0" max="40" value="10">
+          <span id="bwInputVal" style="font-family:var(--font-mono); color:var(--orange);">+10%</span>
+        </div>
+        <div>
+          <label>প্রতিটা Tier-এ Amplification Factor</label><br>
+          <input type="range" id="bwAmp" min="10" max="60" value="35">
+          <span id="bwAmpVal" style="font-family:var(--font-mono); color:var(--orange);">1.35×</span>
+        </div>
+      </div>
+      <div class="bw-chart" id="bwChart">
+        <div class="bw-col"><div class="bw-val" id="bwV0">0%</div><div class="bw-bar" id="bwB0"></div><div class="bw-tier">CUSTOMER<br>(Actual Demand)</div></div>
+        <div class="bw-col"><div class="bw-val" id="bwV1">0%</div><div class="bw-bar" id="bwB1"></div><div class="bw-tier">RETAILER<br>Order</div></div>
+        <div class="bw-col"><div class="bw-val" id="bwV2">0%</div><div class="bw-bar" id="bwB2"></div><div class="bw-tier">DISTRIBUTOR<br>Order</div></div>
+        <div class="bw-col"><div class="bw-val" id="bwV3">0%</div><div class="bw-bar" id="bwB3"></div><div class="bw-tier">FACTORY<br>Order</div></div>
+      </div>
+      <div class="calc-note">খেয়াল করো — Customer-এর actual demand সামান্য বাড়লেও, প্রতিটা tier order batching, safety-margin আর delayed-information-এর কারণে সেটাকে বাড়িয়ে পাঠায়। শেষে Factory একটা demand signal পায় যেটা আসল চাহিদার চেয়ে বহুগুণ বেশি — এটাই Bullwhip Effect।</div>
+    </div>
+
+    <div class="grid2">
+      <div class="card"><div class="k">কারণ ১</div><div class="v" style="font-size:14.5px; font-weight:500; color:var(--paper-dim);">Order Batching — প্রতিবার order না দিয়ে জমিয়ে বড় order দেওয়া</div></div>
+      <div class="card"><div class="k">কারণ ২</div><div class="v" style="font-size:14.5px; font-weight:500; color:var(--paper-dim);">Price Fluctuation — discount/promotion-এর কারণে অস্বাভাবিক bulk order</div></div>
+      <div class="card"><div class="k">কারণ ৩</div><div class="v" style="font-size:14.5px; font-weight:500; color:var(--paper-dim);">Demand Signal Processing — প্রতিটা tier নিজের মতো করে forecast করে, distortion যোগ হয়</div></div>
+      <div class="card"><div class="k">কারণ ৪</div><div class="v" style="font-size:14.5px; font-weight:500; color:var(--paper-dim);">Rationing / Shortage Gaming — stockout ভয়ে বেশি order দেওয়া</div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: POSTPONEMENT -->
+  <div class="sheet" id="s5" data-sheet="SHEET 05 / POSTPONEMENT">
+    <div class="sheet-corner tl"></div><div class="sheet-corner tr"></div><div class="sheet-corner bl"></div><div class="sheet-corner br"></div>
+    <span class="section-tag">STRATEGY</span>
+    <h2 class="bn-head">Postponement Strategy — তিন ধরনের</h2>
+    <p class="sub">যত দেরিতে COMMIT করো, তত বেশি FLEXIBILITY</p>
+
+    <p>নিচের প্রতিটা card-এ ক্লিক করো, দেখো কোন postponement type কোথায় apply হয়:</p>
+
+    <div class="accordion" id="postponeAccordion">
+      <div class="accordion-item">
+        <div class="accordion-head"><div><span class="num">01</span><h4>Form Postponement</h4></div><span class="chevron">+</span></div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Product-কে generic/semi-finished অবস্থায় রাখা, শেষ মুহূর্তে নির্দিষ্ট variant-এ রূপান্তর করা। <strong>উদাহরণ:</strong> Paint কোম্পানি সাদা base রেখে দোকানে গিয়ে color mix করে দেয়। RMG-তে: fabric grey state-এ রেখে order অনুযায়ী শেষ মুহূর্তে dye/print করা।
+        </div></div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-head"><div><span class="num">02</span><h4>Time Postponement</h4></div><span class="chevron">+</span></div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Product তৈরি হয়ে যায়, কিন্তু distribution/movement দেরি করা হয় actual order confirm না হওয়া পর্যন্ত — যাতে central warehouse-এ stock রেখে দ্রুত regional demand অনুযায়ী পাঠানো যায়, আগে থেকে প্রতিটা region-এ push না করে।
+        </div></div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-head"><div><span class="num">03</span><h4>Place Postponement</h4></div><span class="chevron">+</span></div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Central location-এ inventory রাখা, এবং actual demand জানার পর সেটা final destination-এ পাঠানো — অনেকগুলো ছোট regional warehouse-এ আগে থেকে ছড়িয়ে না রেখে। এতে total safety stock কম রাখা যায় (risk pooling)।
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: TOC -->
+  <div class="sheet" id="s6" data-sheet="SHEET 06 / THEORY OF CONSTRAINTS">
+    <div class="sheet-corner tl"></div><div class="sheet-corner tr"></div><div class="sheet-corner bl"></div><div class="sheet-corner br"></div>
+    <span class="section-tag">BOTTLENECK MANAGEMENT</span>
+    <h2 class="bn-head">Theory of Constraints — Five Focusing Steps</h2>
+    <p class="sub">GOLDRATT'S METHOD FOR BOTTLENECK MANAGEMENT (OPT-এর ভিত্তি)</p>
+
+    <p>আগের আর্টিকেলে বলা হয়েছিল "throughput নির্ধারণ করে bottleneck" — কিন্তু bottleneck actually কিভাবে manage করবে? Goldratt-এর ৫টা ধাপ:</p>
+
+    <div class="stepper">
+      <div class="step" data-n="1"><h4>Identify করো</h4><p>System-এর constraint (bottleneck) কোনটা তা খুঁজে বের করো — কোন activity সবচেয়ে ধীর, পুরো throughput তার উপর নির্ভরশীল</p></div>
+      <div class="step" data-n="2"><h4>Exploit করো</h4><p>ওই bottleneck থেকে সর্বোচ্চ output বের করার সিদ্ধান্ত নাও — এটাকে কখনো বসিয়ে রাখা যাবে না, break time-ও কমাতে হবে</p></div>
+      <div class="step" data-n="3"><h4>Subordinate করো</h4><p>বাকি সব non-bottleneck activity-কে bottleneck-এর গতির সাথে synchronize করো — না হলে অপ্রয়োজনীয় inventory জমবে</p></div>
+      <div class="step" data-n="4"><h4>Elevate করো</h4><p>প্রয়োজনে bottleneck-এর capacity বাড়াও — নতুন machine, extra shift, বা outsourcing দিয়ে</p></div>
+      <div class="step" data-n="5"><h4>পুনরাবৃত্তি করো</h4><p>একটা bottleneck সমাধান হলে system-এ নতুন bottleneck তৈরি হবে — Step 1-এ ফিরে যাও, inertia-কে constraint হতে দিও না</p></div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: COMPLEXITY QUICK REF -->
+  <div class="sheet" id="s7" data-sheet="SHEET 07 / QUICK REFERENCE">
+    <div class="sheet-corner tl"></div><div class="sheet-corner tr"></div><div class="sheet-corner bl"></div><div class="sheet-corner br"></div>
+    <span class="section-tag">CROSS-REFERENCE</span>
+    <h2 class="bn-head">৮টা Complexity Source — দ্রুত রিভিশন</h2>
+    <p class="sub">FULL ARTICLE-এর LINK নিচে</p>
+
+    <div class="mini-grid">
+      <div class="mini-tag"><b>01</b>Network</div>
+      <div class="mini-tag"><b>02</b>Process</div>
+      <div class="mini-tag"><b>03</b>Range</div>
+      <div class="mini-tag"><b>04</b>Product</div>
+      <div class="mini-tag"><b>05</b>Customer</div>
+      <div class="mini-tag"><b>06</b>Supplier</div>
+      <div class="mini-tag"><b>07</b>Organizational</div>
+      <div class="mini-tag"><b>08</b>Informational</div>
+    </div>
+    <p>এই ৮টা source-ই lead time-কে পরোক্ষভাবে প্রভাবিত করে — যত বেশি complexity, তত বেশি uncertainty, তত বেশি lead time buffer লাগবে। পূর্ণ ব্যাখ্যা এবং case study (Iceland Volcano, Motorola) আগের আর্টিকেলে আছে।</p>
+  </div>
+
+  <!-- SECTION 8: SELF CHECK QUIZ -->
+  <div class="sheet" id="s8" data-sheet="SHEET 08 / SELF-CHECK">
+    <div class="sheet-corner tl"></div><div class="sheet-corner tr"></div><div class="sheet-corner bl"></div><div class="sheet-corner br"></div>
+    <span class="section-tag">TEST YOURSELF</span>
+    <h2 class="bn-head">৫টা প্রশ্নে নিজেকে যাচাই করো</h2>
+    <p class="sub">প্রতিটা প্রশ্নে ক্লিক করলেই সাথে সাথে ফলাফল দেখাবে</p>
+
+    <div id="quizContainer"></div>
+    <div class="quiz-score" id="quizScore">স্কোর: 0 / 5</div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="mark">SCM MANIFEST</span>
+  MRP & MRP-II · Complexity and the Supply Chain · Strategic Lead Time Management — সিরিজের চতুর্থ ও ইন্টার‌্যাক্টিভ পর্ব
+</footer>
+
+<script>
+  // ---- Nav scroll spy + click ----
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const sections = ['hero','s1','s2','s3','s4','s5','s6','s7','s8'].map(id=>document.getElementById(id));
+  navBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.getElementById(btn.dataset.target).scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        navBtns.forEach(b=>b.classList.remove('active'));
+        const match = document.querySelector(`.nav-btn[data-target="${e.target.id}"]`);
+        if(match) match.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s=>io.observe(s));
+
+  // ---- EOQ calculator ----
+  function calcEOQ(){
+    const D = parseFloat(document.getElementById('eoqD').value)||0;
+    const S = parseFloat(document.getElementById('eoqS').value)||0;
+    const H = parseFloat(document.getElementById('eoqH').value)||1;
+    const eoq = Math.sqrt((2*D*S)/H);
+    document.getElementById('eoqResult').textContent = Math.round(eoq).toLocaleString('en-US');
+  }
+  ['eoqD','eoqS','eoqH'].forEach(id=>document.getElementById(id).addEventListener('input', calcEOQ));
+  calcEOQ();
+
+  // ---- Cash to Cash ----
+  function calcC2C(){
+    const dio = parseFloat(document.getElementById('c2cDIO').value)||0;
+    const dso = parseFloat(document.getElementById('c2cDSO').value)||0;
+    const dpo = parseFloat(document.getElementById('c2cDPO').value)||0;
+    const c2c = dio + dso - dpo;
+    document.getElementById('c2cResult').textContent = c2c;
+    const note = document.getElementById('c2cNote');
+    if(c2c <= 0){
+      note.textContent = 'চমৎকার — এই company সাপ্লায়ারের টাকায় ব্যবসা চালাচ্ছে (negative/zero C2C), cash flow পজিশন শক্তিশালী।';
+    } else if(c2c < 30){
+      note.textContent = 'ভালো পজিশন — cash আটকে থাকার সময় তুলনামূলক কম।';
+    } else {
+      note.textContent = 'দীর্ঘ C2C cycle — company-র cash এই কয়দিন আটকে থাকছে। DIO কমানো বা DPO বাড়ানো নিয়ে চিন্তা করা যেতে পারে।';
+    }
+  }
+  ['c2cDIO','c2cDSO','c2cDPO'].forEach(id=>document.getElementById(id).addEventListener('input', calcC2C));
+  calcC2C();
+
+  // ---- Lead Time Gap ----
+  function calcGap(){
+    const llt = parseFloat(document.getElementById('gapLLT').value)||0;
+    const coc = parseFloat(document.getElementById('gapCOC').value)||0;
+    const gap = llt - coc;
+    const resultEl = document.getElementById('gapResult');
+    const note = document.getElementById('gapNote');
+    if(gap <= 0){
+      resultEl.textContent = '0';
+      resultEl.style.color = 'var(--teal)';
+      note.textContent = 'Gap নেই বা negative — মানে Logistics Lead Time customer-এর acceptable wait time-এর মধ্যেই। Forecast/Inventory ছাড়াই make-to-order সম্ভব!';
+    } else {
+      resultEl.textContent = gap;
+      resultEl.style.color = 'var(--danger)';
+      note.textContent = `${gap} দিনের এই Gap পূরণ করতে হবে Forecast + Safety Stock দিয়ে। Gap যত বড়, forecast error-এর ঝুঁকি ও inventory cost তত বেশি।`;
+    }
+  }
+  ['gapLLT','gapCOC'].forEach(id=>document.getElementById(id).addEventListener('input', calcGap));
+  calcGap();
+
+  // ---- Bullwhip simulator ----
+  function calcBullwhip(){
+    const input = parseFloat(document.getElementById('bwInput').value);
+    const amp = parseFloat(document.getElementById('bwAmp').value)/100 + 1;
+    document.getElementById('bwInputVal').textContent = '+'+input+'%';
+    document.getElementById('bwAmpVal').textContent = amp.toFixed(2)+'×';
+
+    let vals = [input];
+    for(let i=0;i<3;i++){
+      vals.push(vals[vals.length-1]*amp);
+    }
+    const maxVal = Math.max(...vals, 1);
+    vals.forEach((v,i)=>{
+      document.getElementById('bwV'+i).textContent = '+'+Math.round(v)+'%';
+      const heightPct = Math.min((v/maxVal)*100, 100);
+      document.getElementById('bwB'+i).style.height = Math.max(heightPct,3)+'%';
+    });
+  }
+  document.getElementById('bwInput').addEventListener('input', calcBullwhip);
+  document.getElementById('bwAmp').addEventListener('input', calcBullwhip);
+  calcBullwhip();
+
+  // ---- Accordion ----
+  document.querySelectorAll('.accordion-head').forEach(head=>{
+    head.addEventListener('click', ()=>{
+      head.parentElement.classList.toggle('open');
+    });
+  });
+
+  // ---- Quiz ----
+  const quizData = [
+    {
+      q: "যদি Logistics Lead Time ঠিক Customer-এর Required Order Cycle-এর সমান হয়, তাহলে কী দরকার হয় না?",
+      opts: ["Quality Control", "Forecast ও Inventory", "Transportation", "Packaging"],
+      correct: 1,
+      explain: "Lead Time Gap শূন্য হলে make-to-order সম্ভব — forecast বা inventory-র প্রয়োজন থাকে না।"
+    },
+    {
+      q: "Bullwhip Effect-এর মূল কারণ কোনটা না?",
+      opts: ["Order Batching", "Demand Signal Processing error", "Product Design Postponement", "Price Fluctuation"],
+      correct: 2,
+      explain: "Postponement আসলে Bullwhip কমাতে সাহায্য করে, এটা কারণ না — বরং সমাধান।"
+    },
+    {
+      q: "Cash-to-Cash Cycle formula কোনটা সঠিক?",
+      opts: ["DIO − DSO + DPO", "DIO + DSO − DPO", "DSO + DPO − DIO", "DIO × DSO × DPO"],
+      correct: 1,
+      explain: "C2C = DIO + DSO − DPO — কম হলে ভালো, negative হলে best (supplier-এর টাকায় ব্যবসা চলছে)।"
+    },
+    {
+      q: "TOC (Theory of Constraints)-এর প্রথম ধাপ কোনটা?",
+      opts: ["Elevate the constraint", "Identify the constraint", "Subordinate everything else", "Repeat the process"],
+      correct: 1,
+      explain: "প্রথমে constraint/bottleneck identify করতে হয়, তারপর exploit, subordinate, elevate, repeat।"
+    },
+    {
+      q: "Form Postponement-এর RMG উদাহরণ কোনটা?",
+      opts: ["আগে থেকেই সব রঙে fabric dye করে রাখা", "Grey fabric রেখে order অনুযায়ী শেষ মুহূর্তে dye করা", "সব warehouse-এ সমান stock ছড়িয়ে রাখা", "বছরে একবার bulk order করা"],
+      correct: 1,
+      explain: "Form Postponement মানে product-কে generic রেখে শেষ মুহূর্তে নির্দিষ্ট form-এ কনভার্ট করা — grey fabric রেখে দেরিতে dye করাটাই সেই উদাহরণ।"
+    }
+  ];
+
+  let score = 0;
+  let answered = new Set();
+  const quizContainer = document.getElementById('quizContainer');
+
+  quizData.forEach((item, qIdx)=>{
+    const qDiv = document.createElement('div');
+    qDiv.className = 'quiz-q';
+    qDiv.innerHTML = `
+      <p class="qtext">${qIdx+1}. ${item.q}</p>
+      <div class="quiz-opts">
+        ${item.opts.map((opt,oIdx)=>`<button class="quiz-opt" data-q="${qIdx}" data-o="${oIdx}">${opt}</button>`).join('')}
+      </div>
+      <div class="quiz-feedback" id="fb-${qIdx}"></div>
+    `;
+    quizContainer.appendChild(qDiv);
+  });
+
+  quizContainer.addEventListener('click', (e)=>{
+    if(!e.target.classList.contains('quiz-opt')) return;
+    const qIdx = parseInt(e.target.dataset.q);
+    if(answered.has(qIdx)) return;
+    answered.add(qIdx);
+
+    const oIdx = parseInt(e.target.dataset.o);
+    const item = quizData[qIdx];
+    const allOpts = document.querySelectorAll(`.quiz-opt[data-q="${qIdx}"]`);
+    allOpts.forEach(opt=>{
+      const optIdx = parseInt(opt.dataset.o);
+      if(optIdx === item.correct) opt.classList.add('correct');
+      else if(optIdx === oIdx) opt.classList.add('wrong');
+    });
+    if(oIdx === item.correct) score++;
+
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.textContent = item.explain;
+    fb.classList.add('show');
+
+    document.getElementById('quizScore').textContent = `স্কোর: ${score} / ${quizData.length}`;
+  });
+</script>
+
+</body>
+</html>
