@@ -11,6 +11,41 @@ let POSTS = [];
 let activeCategory = 'all';
 let searchTerm = '';
 
+// ---------- theme (day / night) ----------
+
+function initTheme(){
+  const saved = localStorage.getItem('scm-theme');
+  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  const theme = saved || (prefersLight ? 'light' : 'dark');
+  document.documentElement.setAttribute('data-theme', theme);
+  updateToggleIcon(theme);
+}
+
+function toggleTheme(){
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = current === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('scm-theme', next);
+  updateToggleIcon(next);
+}
+
+function updateToggleIcon(theme){
+  const btn = document.getElementById('themeToggle');
+  if(!btn) return;
+  btn.innerHTML = theme === 'light'
+    ? '<span class="theme-toggle__icon">☀️</span><span class="theme-toggle__label">DAY</span>'
+    : '<span class="theme-toggle__icon">🌙</span><span class="theme-toggle__label">NIGHT</span>';
+  btn.setAttribute('aria-label', theme === 'light' ? 'Switch to night mode' : 'Switch to day mode');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  const btn = document.getElementById('themeToggle');
+  if(btn) btn.addEventListener('click', toggleTheme);
+});
+
+// ---------- stats ----------
+
 function renderStats(posts){
   const strip = document.getElementById('statsStrip');
   if(!strip) return;
@@ -21,7 +56,20 @@ function renderStats(posts){
 
   const blocks = strip.querySelectorAll('.stat-num');
   const values = [total, cleared, inTransit, routes];
-  blocks.forEach((el, i) => { el.textContent = values[i]; });
+  blocks.forEach((el, i) => { animateNumber(el, values[i]); });
+}
+
+// count-up animation for stat numbers — small "alive" touch
+function animateNumber(el, target){
+  const duration = 600;
+  const start = performance.now();
+  function tick(now){
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target);
+    if(progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 }
 
 async function loadPosts(){
@@ -85,17 +133,27 @@ function renderList(){
     </button>
   `).join('');
 
-  const rows = filtered.map(p => `
-    <div class="manifest-row" tabindex="0" role="button" data-id="${escapeHtml(p.id)}" aria-label="Open entry: ${escapeHtml(p.title)}">
+  const rows = filtered.map((p, i) => {
+    const isInteractive = p.type === 'interactive';
+    const statusHtml = isInteractive
+      ? `<span class="live-dot" aria-hidden="true"></span>LIVE MODULE`
+      : `${p.status.toUpperCase()}`;
+    const statusClasses = isInteractive
+      ? 'status-interactive'
+      : statusClass(p.status);
+
+    return `
+    <div class="manifest-row ${isInteractive ? 'manifest-row--interactive' : ''}" style="animation-delay:${Math.min(i * 35, 400)}ms" tabindex="0" role="button" data-id="${escapeHtml(p.id)}" data-external="${isInteractive ? escapeHtml(p.url || '') : ''}" aria-label="Open entry: ${escapeHtml(p.title)}">
       <div class="m-track">${escapeHtml(p.id)}</div>
       <div class="m-main">
-        <p class="m-title">${escapeHtml(p.title)}</p>
+        <p class="m-title">${escapeHtml(p.title)} ${isInteractive ? '<span class="m-flag">⚡ INTERACTIVE</span>' : ''}</p>
         <p class="m-summary">${escapeHtml(p.summary)}</p>
       </div>
       <div class="m-cat">${escapeHtml(p.category)}</div>
-      <div class="m-status ${statusClass(p.status)}">${p.status.toUpperCase()}</div>
+      <div class="m-status ${statusClasses}">${statusHtml}</div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   app.innerHTML = `
     <div class="controls">
@@ -122,7 +180,14 @@ function renderList(){
   });
 
   app.querySelectorAll('.manifest-row').forEach(row => {
-    const go = () => { window.location.hash = `#/post/${encodeURIComponent(row.dataset.id)}`; };
+    const go = () => {
+      const externalUrl = row.dataset.external;
+      if(externalUrl){
+        window.open(externalUrl, '_blank', 'noopener');
+        return;
+      }
+      window.location.hash = `#/post/${encodeURIComponent(row.dataset.id)}`;
+    };
     row.addEventListener('click', go);
     row.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); } });
   });
